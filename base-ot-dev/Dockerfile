@@ -20,7 +20,7 @@ RUN dpkg-reconfigure locales \
 
 # setup a non-root user
 RUN useradd -ms /bin/bash otuser
-# become otuser and create build folder but check if it already exists 
+# set otuser home env will be used in downstream builds
 ENV HOME /home/otuser
 
 # install test deps

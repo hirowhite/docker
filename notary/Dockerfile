@@ -33,4 +33,4 @@ RUN set +x; \
                 && cd opentxs-source \
                 && mkdir build
 USER root
-CMD /bin/bash/
+CMD ["bash"]
