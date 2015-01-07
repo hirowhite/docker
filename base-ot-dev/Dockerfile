@@ -8,7 +8,7 @@ RUN apt-get update \
 	&& apt-get install -y --no-install-recommends software-properties-common \
 	&& add-apt-repository ppa:hamrle/ppa \
 	&& apt-get update \
-	&& apt-get install -y --no-install-recommends g++ make cmake libssl-dev protobuf-compiler libprotobuf-dev libzmq3-dev git python3-dev swig3.0 cppcheck clang-format-3.5 \
+	&& apt-get install -y --no-install-recommends g++ make cmake libssl-dev protobuf-compiler libprotobuf-dev libzmq3-dev git python3-dev swig3.0 cppcheck clang-format-3.5 python3-pip \
 	&& ln -s /usr/bin/swig3.0 /usr/bin/swig \
 	&& apt-get autoremove
 ENV DEBIAN_FRONTEND noninteractive
@@ -22,11 +22,14 @@ RUN dpkg-reconfigure locales \
 RUN useradd -ms /bin/bash otuser
 # become otuser and create build folder but check if it already exists 
 ENV HOME /home/otuser
+
+# install test deps
+ENV TEST_DIR /home/otuser/opentxs-tests
+RUN mkdir -p $TEST_DIR/python3
+WORKDIR $TEST_DIR/python3
+RUN wget https://raw.githubusercontent.com/monetas/opentxs-tests/master/python3/requirements.txt
+ENV PYTHONPATH /usr/local/lib/x86_64-linux-gnu/python3.4/site-packages/:$TEST_DIR/python3
+RUN pip3 install -Ur requirements.txt
+
 WORKDIR /home/otuser
-
 CMD ["bash"]
-
-
-
-
-
