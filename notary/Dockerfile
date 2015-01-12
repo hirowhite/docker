@@ -8,7 +8,7 @@ WORKDIR /home/otbuilder/
 RUN set +x; \
                 apt-get update \
                 && apt-get install -y --no-install-recommends software-properties-common \
-                && add-apt-repository ppa:hamrle/ppa \
+                && add-apt-repository ppa:monetas/opentxs \
                 && apt-get update \
                 && apt-get install -y --no-install-recommends g++ make cmake libssl-dev protobuf-compiler libprotobuf-dev libzmq3-dev git python3-dev swig3.0 cppcheck clang-format-3.5 \
                 && ln -s /usr/bin/swig3.0 /usr/bin/swig \
